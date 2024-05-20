@@ -2,10 +2,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const CreateUserForm = () => {
   const navigate = useNavigate();
-  const [error, setError] = useState("");
+  const [err, setErr] = useState("");
+  const { loading, userInfo, error } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -33,7 +35,7 @@ const CreateUserForm = () => {
           role: formData.role,
         });
         console.log(response.data);
-        setError("success");
+        setErr("success");
         let answer = window.confirm("User has been adeed! \nAdd New User?");
         if (answer === true) {
           window.location.reload();
@@ -46,9 +48,9 @@ const CreateUserForm = () => {
     } catch (error) {
       console.error("There was an error adding the item!", error);
       if (error.response && error.response.data) {
-        setError(error.response.data.message);
+        setErr(error.response.data.message);
       } else {
-        setError("An error occurred");
+        setErr("An error occurred");
       }
     }
   };
@@ -136,12 +138,12 @@ const CreateUserForm = () => {
                     required
                   />
                 </div>
-                {error === "success" ? (
+                {err === "success" ? (
                   <div className="alert alert-success">User has been added</div>
-                ) : error === "" ? (
+                ) : err === "" ? (
                   <></>
                 ) : (
-                  <div className="alert alert-danger">{error}</div>
+                  <div className="alert alert-danger">{err}</div>
                 )}
                 <button
                   type="submit"

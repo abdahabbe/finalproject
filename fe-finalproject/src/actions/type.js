@@ -13,3 +13,7 @@ export const ADD_STOCK = 'ADD_STOCK';
 export const DELETE_STOCK = 'DELETE_STOCK';
 export const UPDATE_STOCK = 'UPDATE_STOCK';
 export const SELECT_STOCK = 'SELECT_STOCK';
+
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';

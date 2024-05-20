@@ -65,7 +65,7 @@ app.post("/login", async (req, res) => {
       // Compare password hash
       const passwordMatch = password === user.password;
       if (passwordMatch) {
-        res.status(200).json({ message: "Login successful" });
+        res.status(200).json({ user: user, message: "Login successful" });
       } else {
         res.status(401).json({ message: "Invalid credentials" });
       }

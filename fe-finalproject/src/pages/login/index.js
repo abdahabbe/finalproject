@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../actions/loginAction";
 import axios from "axios";
 
 const Login = () => {
@@ -7,25 +9,34 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const dispatch = useDispatch();
+  const { loading, user, error } = useSelector((state) => state.auth);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:3000/login", {
-        username,
-        password,
-      });
-      setMessage(response.data.message);
-      navigate("/home");
-    } catch (error) {
-      setMessage(`Failed to login yeah user ${username} dan pass ${password}`);
-      console.log("http://localhost:3000/login", {
-        username,
-        password,
-      });
-      console.error(error);
-    }
+    dispatch(login(username, password));
+    // try {
+    //   const response = await axios.post("http://localhost:3000/login", {
+    //     username,
+    //     password,
+    //   });
+    //   setMessage(response.data.message);
+    //   navigate("/home");
+    // } catch (error) {
+    //   setMessage(`Failed to login yeah user ${username} dan pass ${password}`);
+    //   console.log("http://localhost:3000/login", {
+    //     username,
+    //     password,
+    //   });
+    //   console.error(error);
+    // }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    }
+  });
 
   return (
     <div className="container">
@@ -60,6 +71,9 @@ const Login = () => {
                 <button type="submit" className="btn btn-primary btn-block">
                   Login
                 </button>
+                {/* {loading && <p>Loading...</p>}
+                {error && <p>Error: {error}</p>} }
+                 {userInfo && <p>Welcome, {userInfo}!</p>} */}
               </form>
             </div>
           </div>
