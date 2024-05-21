@@ -27,7 +27,7 @@ function Home() {
   };
 
   const fetchDataInventory = async () => {
-    const url = "http://localhost:3000/api/inventory";
+    const url = "http://localhost:3000/api/inventory"; //change localhost/baseUrl into variable
     const data = await fetchData(url);
     setItems(data);
   };

@@ -38,6 +38,7 @@ const InventoryList = ({ items, deleteItem }) => {
         <thead>
           <tr>
             <th className="text-center">#</th>
+            <th className="text-center">Image</th>
             <th className="text-center">Name</th>
             <th className="text-center">Price</th>
             <th className="text-center">Quantity</th>
@@ -48,8 +49,14 @@ const InventoryList = ({ items, deleteItem }) => {
           {items.map((item, index) => (
             <tr key={index}>
               <td className="text-center">{index + 1}</td>
+              <td className="text-center align-middle">
+                <img style={{ width: 50 }} src={item.imageUrl} />
+              </td>
               <td className="text-center align-middle">{item.name}</td>
-              <td className="text-center align-middle">Rp. {item.price}</td>
+              <td className="text-center align-middle">
+                Rp. {item.price}
+              </td>{" "}
+              {/* gunakan pemisah currency */}
               <td className="text-center align-middle">{item.quantity} pcs</td>
               <td className="text-center align-middle">
                 <Button

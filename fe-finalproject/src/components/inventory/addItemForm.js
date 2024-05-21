@@ -5,6 +5,7 @@ import axios from "axios";
 const AddItemForm = ({ addItem }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
+  const [imageURL, setImageUrl] = useState("");
   const [stock, setStock] = useState(0);
 
   const handleSubmit = async (e) => {
@@ -17,6 +18,7 @@ const AddItemForm = ({ addItem }) => {
             name,
             price,
             stock,
+            imageURL,
           }
         );
         console.log(response.data);
@@ -40,6 +42,15 @@ const AddItemForm = ({ addItem }) => {
           placeholder="Enter item name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+        />
+      </Form.Group>
+      <Form.Group controlId="formImageURL" style={{ marginTop: 10 }}>
+        <Form.Label>Image Url</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter image url"
+          value={imageURL}
+          onChange={(e) => setImageUrl(e.target.value)}
         />
       </Form.Group>
       <Form.Group controlId="formPrice" style={{ marginTop: 10 }}>

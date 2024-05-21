@@ -92,12 +92,18 @@ app.get("/api/inventory", async (req, res) => {
 
 // Add item
 app.post("/api/inventory/add", async (req, res) => {
-  const { name, price, stock } = req.body;
+  const { name, price, stock, imageUrl } = req.body;
   const createDate = new Date();
   try {
     const query =
-      "INSERT INTO products (name, price, create_at, quantity) VALUES ($1, $2, $3, $4) RETURNING *";
-    const result = await pool.query(query, [name, price, createDate, stock]);
+      "INSERT INTO products (name, price, create_at, quantity, imageUrl) VALUES ($1, $2, $3, $4, $5) RETURNING *";
+    const result = await pool.query(query, [
+      name,
+      price,
+      createDate,
+      stock,
+      imageUrl,
+    ]);
     res.status(201).json(result.rows[0]);
   } catch (error) {
     console.error("Error executing query", error);
